@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<queries>
+	<submenu title="Ресурсоснабжающие организации">
+		<menuitem id="2011">МУП «Варениковское коммунальное хозяйство»</menuitem>
+		<menuitem id="2012">ООО «Водоканал Крымск»</menuitem>
+		<menuitem id="2013">НАО «ТЭК» «ТЭК город Крымск»</menuitem>
+	</submenu>
+	<submenu title="Минприроды Краснодарского края">
+		<menuitem id="2021">О пересечении с землями лесного фонда</menuitem>
+		<menuitem id="2022">О расположении в ООПТ</menuitem>
+	</submenu>
+	<submenu title="Сельские поселения">
+		<menuitem id="2031">О предоставлении информации</menuitem>
+		<menuitem id="2032">О присвоении адреса</menuitem>
+	</submenu>
+	<submenu title="Управление архитектуры">
+		<menuitem id="2041">Об утверждении схемы </menuitem>
+		<menuitem id="2042">О предоставлении участка</menuitem>
+	</submenu>
+	<submenu title="Управление имущественных отношений">
+		<menuitem id="2051">О предоставлении информации</menuitem>
+	</submenu>
+	<submenu title="Управление государственной охраны памятников">
+		<menuitem id="2061">О наличии/отсутствии объектов культурного наследия</menuitem>
+	</submenu>
+	<submenu title="ГУП Кубаньводкомплекс">
+		<menuitem id="2071">О предоставлении информации</menuitem>
+	</submenu>
+	<submenu title="ОАО Роснефть">
+		<menuitem id="2081">О предоставлении информации</menuitem>
+	</submenu>
+	<submenu title="Кубанское водное бассейновое управление">
+		<menuitem id="2091">О предоставлении информации</menuitem>
+	</submenu>
+	<submenu title="Заявителю">
+		<menuitem id="2101">Об утверждении иной схемы</menuitem>
+	</submenu>
+	<submenu title="Росреестр">
+		<menuitem id="2111">Предоставление сведений</menuitem>
+	</submenu>
+</queries>
