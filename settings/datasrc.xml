@@ -6,12 +6,13 @@
 			<item id="1" alias="~">Адагумское</item>
 			<item id="2" alias="~">Варениковское</item>
 			<item id="3" alias="~">Кеслеровское</item>
-			<item id="4" alias="~">Молдаванское</item>
+			<item id="4" alias="~">Киевское</item>
 			<item id="5" alias="~">Мерчанское</item>
-			<item id="6" alias="~">Нижнебаканское</item>
-			<item id="7" alias="~">Пригородное</item>
-			<item id="8" alias="~">Троицкое</item>
-			<item id="9" alias="~">Южное</item>
+			<item id="6" alias="~">Молдаванское</item>
+			<item id="7" alias="~">Нижнебаканское</item>
+			<item id="8" alias="~">Пригородное</item>
+			<item id="9" alias="~">Троицкое</item>
+			<item id="10" alias="~">Южное</item>
 		</source>
 		<source name="servname">
 			<item id="0" alias="~"></item>

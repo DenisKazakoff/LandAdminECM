@@ -19,8 +19,8 @@ ID_SAVE_AS = 1004
 ID_CHK_LST = 1011
 ID_CLOSE = 1098
 ID_EXIT = 1099
-ID_MANUAL = 3001
-ID_ABOUT = 3002
+ID_MANUAL = 5001
+ID_ABOUT = 5002
 
 
 ###########################################################################
@@ -208,8 +208,32 @@ class TabCommon ( scrlpanel.ScrolledPanel ):
         # Events
         self.txtSkpNum.Bind(
             wx.EVT_TEXT, self.OnChnage_AnyCtrl )
-        self.chcCityName.Bind(
+        self.spnSkpDay.Bind( 
+            wx.EVT_TEXT, self.OnChnage_AnyCtrl )        
+        self.spnSkpDay.Bind( 
+            wx.EVT_SPINCTRL, self.OnChnage_AnyCtrl )
+        self.chcSkpMonth.Bind( 
             wx.EVT_CHOICE, self.OnChnage_AnyCtrl )
+        self.spnSkpYear.Bind( 
+            wx.EVT_TEXT, self.OnChnage_AnyCtrl )        
+        self.spnSkpYear.Bind( 
+            wx.EVT_SPINCTRL, self.OnChnage_AnyCtrl )
+        
+        self.txtRegNum.Bind(
+            wx.EVT_TEXT, self.OnChnage_AnyCtrl )
+        self.spnRegDay.Bind( 
+            wx.EVT_TEXT, self.OnChnage_AnyCtrl )        
+        self.spnRegDay.Bind( 
+            wx.EVT_SPINCTRL, self.OnChnage_AnyCtrl )
+        self.chcRegMonth.Bind( 
+            wx.EVT_CHOICE, self.OnChnage_AnyCtrl )
+        self.spnRegYear.Bind( 
+            wx.EVT_TEXT, self.OnChnage_AnyCtrl )        
+        self.spnRegYear.Bind( 
+            wx.EVT_SPINCTRL, self.OnChnage_AnyCtrl )
+
+        self.chcCityName.Bind(
+            wx.EVT_CHOICE, self.OnChoice_CityName )
         self.chcServName.Bind(
             wx.EVT_CHOICE, self.OnChnage_AnyCtrl )
         self.chcClientType.Bind(
@@ -228,22 +252,29 @@ class TabCommon ( scrlpanel.ScrolledPanel ):
 
     def OnChnage_AnyCtrl (self, event):
         event.Skip()
-        parent = self.GetParent().GetParent()
+        parent = self.GetParent().GetParent() # PanelDeclarant
         parent.OnChnage_AnyCtrl( event )
+        return
+
+    def OnChoice_CityName( self, event ):
+        event.Skip()
+        parent = self.GetParent().GetParent().GetParent() # MainForm
+        parent.RefreshMainMenu( )
+        self.OnChnage_AnyCtrl( event )
         return
 
     def OnChoice_ClientType( self, event ):
         event.Skip()
-        parent = self.GetParent().GetParent()
+        parent = self.GetParent().GetParent() # PanelDeclarant
         parent.RefreshTabDeclarant( )
-        parent.OnChnage_AnyCtrl( event )
+        self.OnChnage_AnyCtrl( event )
         return
 
     def OnCheckBox_Agent( self, event ):
         event.Skip()
-        parent = self.GetParent().GetParent()
+        parent = self.GetParent().GetParent() # PanelDeclarant
         parent.RefreshTabAgent( )
-        parent.OnChnage_AnyCtrl( event )
+        self.OnChnage_AnyCtrl( event )
         return
 
 ###########################################################################
@@ -555,7 +586,7 @@ class PanelPerson ( scrlpanel.ScrolledPanel ):
    
     def OnChnage_AnyCtrl (self, event):
         event.Skip()
-        parent = self.GetParent().GetParent().GetParent()
+        parent = self.GetParent().GetParent().GetParent() # PanelDeclarant
         parent.OnChnage_AnyCtrl( event )
         return
         
@@ -771,7 +802,7 @@ class PanelFirm ( scrlpanel.ScrolledPanel ):
 
     def OnChnage_AnyCtrl (self, event):
         event.Skip()
-        parent = self.GetParent().GetParent().GetParent()
+        parent = self.GetParent().GetParent().GetParent() # PanelDeclarant
         parent.OnChnage_AnyCtrl( event )
         return
 
@@ -1418,6 +1449,12 @@ class TabArea ( scrlpanel.ScrolledPanel ):
         self.btnSpcZones.Bind( wx.EVT_BUTTON, self.OnClickBtn_SpcZones )        
         return
 
+    def OnChnage_AnyCtrl (self, event):
+        event.Skip()
+        parent = self.GetParent().GetParent()
+        parent.OnChnage_AnyCtrl( event )
+        return
+
     def RefrechSpcZones ( self, listZones ):
         dataSource = modules.DataSource()
         listAreaSpcZones = dataSource.RetrieveData(
@@ -1427,13 +1464,6 @@ class TabArea ( scrlpanel.ScrolledPanel ):
         for zoneIdx in listZones:
             zoneTxt = listAreaSpcZones[ zoneIdx ]
             self.lstbSpcZones.Append( zoneTxt )        
-        return
-
-    # Events TabArea
-    def OnChnage_AnyCtrl (self, event):
-        event.Skip()
-        parent = self.GetParent().GetParent()
-        parent.OnChnage_AnyCtrl( event )
         return
       
     def OnClickBtn_SpcZones( self, event ):
@@ -2287,29 +2317,23 @@ class PanelDoc ( wx.Panel ):
         return    
 
     def OnClickbtnPrev( self, event ):
-
         event.Skip()
         idx = self.notebook.GetSelection( )
-        #self.GetTabsData( idx )
         while idx > 0:
             idx = idx - 1
             if self.notebook.GetEnabled( idx ): 
                 break
         self.notebook.SetSelection( idx )       
-        #self.SetTabsData( idx )
         return
 
     def OnClickbtnNext( self, event ):
-
         event.Skip()
         idx = self.notebook.GetSelection()
-        #self.GetTabsData( idx )
         while idx < 4:
             idx = idx + 1
             if self.notebook.GetEnabled( idx ): 
                 break
         self.notebook.SetSelection( idx )
-        #self.SetTabsData( idx )
         return
 
     def OnChnage_AnyCtrl( self, event ):
@@ -2425,7 +2449,6 @@ class FrameMain ( wx.Frame ):
             title = u'СЭД "Управление земельными ресурсами"',
             size = ( 1024, 640 ),
             style = wx.DEFAULT_FRAME_STYLE )
-            #style = wx.CAPTION|wx.CLOSE_BOX|wx.MINIMIZE_BOX|wx.SYSTEM_MENU|wx.TAB_TRAVERSAL )
 
         DefaultFont = wx.SystemSettings.GetFont( wx.SYS_DEFAULT_GUI_FONT )
         DefaultFont.SetPointSize(9)
@@ -2497,7 +2520,38 @@ class FrameMain ( wx.Frame ):
                     id = item.GetId() )
         return
 
-    def RefreshCtrlStates( self, resetChanges = False ):
+    
+    def RefreshMainMenu( self ):
+        try: 
+            if self.panelDoc: pass
+        except Exception as e: 
+            print ( e )
+            self.menubar.itemClose.Enable( False )
+            self.menubar.itemSave.Enable( False )
+            self.menubar.itemCklist.Enable( False )           
+            
+            for submenu in self.menubar.menuScheme:
+                for itemID in self.menubar.menuScheme[ submenu ].items:
+                    item = self.menubar.menuScheme[ submenu ].items[ itemID ]
+                    item.Enable( False )
+        else:         
+            self.menubar.itemClose.Enable( True )
+            self.menubar.itemSave.Enable( True )
+            self.menubar.itemCklist.Enable( True )
+            
+            for submenu in self.menubar.menuScheme:
+                for itemID in self.menubar.menuScheme[ submenu ].items:
+                    item = self.menubar.menuScheme[ submenu ].items[ itemID ]
+                    item.Enable( True )
+            '''
+            for submenu in self.menubar.menuScheme:
+                rootItem = self.menubar.menuScheme[ submenu ].rootItem
+                if ( rootItem.GetItemLabelText( ) == 'Сельские поселения' ):
+                    break
+            '''
+        return
+
+    def RefreshStatusBar( self ):
         try: 
             if self.panelDoc: pass
         except Exception as e: 
@@ -2506,17 +2560,7 @@ class FrameMain ( wx.Frame ):
             self.statusbar.SetStatusText( "", i = 2 )
             self.statusbar.SetStatusText( "", i = 4 )
             self.statusbar.SetStatusText( "", i = 5 )
-            self.menubar.itemClose.Enable( False )
-            self.menubar.itemSave.Enable( False )
-            self.menubar.itemCklist.Enable( False )
-            
-            for submenu in self.menubar.menuScheme:
-                for itemID in self.menubar.menuScheme[ submenu ].items:
-                    item = self.menubar.menuScheme[ submenu ].items[ itemID ]
-                    item.Enable( False )
         else:
-            if resetChanges: self.panelDoc.docChanges = 0
-            else: self.panelDoc.docChanges += 1
             self.statusbar.SetStatusText(                     
                 pathlib.Path( self.panelDoc.fileName ).name, i = 0 )
             caseDoc = self.panelDoc.caseDocument
@@ -2526,14 +2570,17 @@ class FrameMain ( wx.Frame ):
             self.statusbar.SetStatusText( status, i = 4 )
             self.statusbar.SetStatusText(                     
                 str( self.panelDoc.docChanges ), i = 5 )            
-            self.menubar.itemClose.Enable( True )
-            self.menubar.itemSave.Enable( True )
-            self.menubar.itemCklist.Enable( True )
-            
-            for submenu in self.menubar.menuScheme:
-                for itemID in self.menubar.menuScheme[ submenu ].items:
-                    item = self.menubar.menuScheme[ submenu ].items[ itemID ]
-                    item.Enable( True )
+        return
+
+    def RefreshCtrlStates( self, resetChanges = False ):
+        try: 
+            if self.panelDoc: pass
+        except Exception as e: print (e)
+        else:
+            if resetChanges: self.panelDoc.docChanges = 0
+            else: self.panelDoc.docChanges += 1
+        self.RefreshStatusBar( )
+        self.RefreshMainMenu( )
         return    
 
     def CloseCaseDoc( self ):

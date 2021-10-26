@@ -1,41 +1,59 @@
 <?xml version='1.0' encoding='utf-8'?>
 <queries>
 	<submenu title="Ресурсоснабжающие организации">
-		<menuitem id="2011">МУП «Варениковское коммунальное хозяйство»</menuitem>
-		<menuitem id="2012">ООО «Водоканал Крымск»</menuitem>
-		<menuitem id="2013">НАО «ТЭК» «ТЭК город Крымск»</menuitem>
+		<menuitem id="2001">МУП «Варениковское коммунальное хозяйство»</menuitem>
+		<menuitem id="2002">ООО «Водоканал Крымск»</menuitem>
+		<menuitem id="2003">НАО «ТЭК» «ТЭК город Крымск»</menuitem>
 	</submenu>
 	<submenu title="Минприроды Краснодарского края">
-		<menuitem id="2021">О пересечении с землями лесного фонда</menuitem>
-		<menuitem id="2022">О расположении в ООПТ</menuitem>
+		<menuitem id="2101">О пересечении с землями лесного фонда</menuitem>
+		<menuitem id="2102">О расположении в ООПТ</menuitem>
 	</submenu>
 	<submenu title="Сельские поселения">
-		<menuitem id="2031">О предоставлении информации</menuitem>
-		<menuitem id="2032">О присвоении адреса</menuitem>
+		<menuitem id="2201">О предоставлении информации в Адагумское</menuitem>
+		<menuitem id="2202">О предоставлении информации в Варениковское</menuitem>
+		<menuitem id="2203">О предоставлении информации в Кеслеровское</menuitem>
+		<menuitem id="2204">О предоставлении информации в Киевское</menuitem>
+		<menuitem id="2205">О предоставлении информации в Мерчаснское</menuitem>
+		<menuitem id="2206">О предоставлении информации в Молдаванское</menuitem>
+		<menuitem id="2207">О предоставлении информации в Нижнебаканское</menuitem>
+		<menuitem id="2208">О предоставлении информации в Пригородное</menuitem>
+		<menuitem id="2209">О предоставлении информации в Троицкое</menuitem>
+		<menuitem id="2210">О предоставлении информации в Южное</menuitem>
+		<menuitem id="2251">О присвоении адреса в Адагумское</menuitem>
+		<menuitem id="2252">О присвоении адреса в Варениковское</menuitem>
+		<menuitem id="2253">О присвоении адреса в Кеслеровское</menuitem>
+		<menuitem id="2254">О присвоении адреса в Киевское</menuitem>
+		<menuitem id="2255">О присвоении адреса в Мерчаснское</menuitem>
+		<menuitem id="2256">О присвоении адреса в Молдаванское</menuitem>
+		<menuitem id="2257">О присвоении адреса в Нижнебаканское</menuitem>
+		<menuitem id="2258">О присвоении адреса в Пригородное</menuitem>
+		<menuitem id="2259">О присвоении адреса в Троицкое</menuitem>
+		<menuitem id="2260">О присвоении адреса в Южное</menuitem>
 	</submenu>
 	<submenu title="Управление архитектуры">
-		<menuitem id="2041">Об утверждении схемы </menuitem>
-		<menuitem id="2042">О предоставлении участка</menuitem>
+		<menuitem id="2301">Об утверждении схемы </menuitem>
+		<menuitem id="2302">О предоставлении участка</menuitem>
 	</submenu>
 	<submenu title="Управление имущественных отношений">
-		<menuitem id="2051">О предоставлении информации</menuitem>
+		<menuitem id="2401">О предоставлении информации</menuitem>
 	</submenu>
 	<submenu title="Управление государственной охраны памятников">
-		<menuitem id="2061">О наличии/отсутствии объектов культурного наследия</menuitem>
+		<menuitem id="2501">Об объектах культурного наследия</menuitem>
 	</submenu>
 	<submenu title="ГУП Кубаньводкомплекс">
-		<menuitem id="2071">О предоставлении информации</menuitem>
+		<menuitem id="2601">О предоставлении информации</menuitem>
 	</submenu>
 	<submenu title="ОАО Роснефть">
-		<menuitem id="2081">О предоставлении информации</menuitem>
+		<menuitem id="2701">О предоставлении информации</menuitem>
 	</submenu>
 	<submenu title="Кубанское водное бассейновое управление">
-		<menuitem id="2091">О предоставлении информации</menuitem>
+		<menuitem id="2801">О предоставлении информации</menuitem>
 	</submenu>
 	<submenu title="Заявителю">
-		<menuitem id="2101">Об утверждении иной схемы</menuitem>
+		<menuitem id="2901">Об утверждении иной схемы</menuitem>
 	</submenu>
 	<submenu title="Росреестр">
-		<menuitem id="2111">Предоставление сведений</menuitem>
+		<menuitem id="3001">Предоставление сведений</menuitem>
 	</submenu>
 </queries>
