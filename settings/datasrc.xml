@@ -2,22 +2,23 @@
 <data>
 	<section name="common">
 		<source name="cityname">
-			<item id="0" alias="~"></item>
-			<item id="1" alias="~">Адагумское</item>
-			<item id="2" alias="~">Варениковское</item>
-			<item id="3" alias="~">Кеслеровское</item>
-			<item id="4" alias="~">Киевское</item>
-			<item id="5" alias="~">Мерчанское</item>
-			<item id="6" alias="~">Молдаванское</item>
-			<item id="7" alias="~">Нижнебаканское</item>
-			<item id="8" alias="~">Пригородное</item>
-			<item id="9" alias="~">Троицкое</item>
-			<item id="10" alias="~">Южное</item>
+			<item id="0" alias="~" dhead="" fhead=""></item>
+			<item id="1" alias="Адагумского" dhead="А.В. Грицюта" fhead="Андрей Васильевич">Адагумское</item>
+			<item id="2" alias="Варениковского" dhead="И.Ю. Бакриневой" fhead="Ирина Юрьевна">Варениковское</item>
+			<item id="3" alias="Кеслеровского" dhead="С.В. Сопелиди" fhead="Сергей Викторович">Кеслеровское</item>
+			<item id="4" alias="Киевского" dhead="Б.С. Шатуну" fhead="Борис Сергеевич">Киевское</item>
+			<item id="5" alias="Мерчанского" dhead="Е.В. Прокопенко" fhead="Елена Васильевна">Мерчанское</item>
+			<item id="6" alias="Молдаванского" dhead="А.Н. Шахову" fhead="Алексей Николаевич">Молдаванское</item>
+			<item id="7" alias="Нижнебаканского" dhead="И.И. Гернешему" fhead="Иван Иванович">Нижнебаканское</item>
+			<item id="8" alias="Пригородного" dhead="В.В. Лазареву" fhead="Василий Васильевич">Пригородное</item>
+			<item id="9" alias="Троицкого" dhead="В.И. Позняку" fhead="Виктор Иванович">Троицкое</item>
+			<item id="10" alias="Южного" dhead="А.А. Ниниеву" fhead="Александр Анастасович">Южное</item>
 		</source>
 		<source name="servname">
 			<item id="0" alias="~"></item>
 			<item id="1" alias="~">предоставление з/у</item>
 			<item id="2" alias="~">предварительное согласование</item>
+			<item id="2" alias="~">утверждение схемы</item>
 		</source>
 		<source name="clienttype">
 			<item id="0" alias="~"></item>
@@ -35,10 +36,10 @@
 	<section name="firm">
 		<source name="firmtype">
 			<item id="0" alias="~"></item>
-			<item id="1" alias="~">публично-правовое образование</item>
-			<item id="2" alias="~">общество с ограниченной ответственностью</item>
-			<item id="4" alias="~">непубличное акционерное общество</item>
-			<item id="5" alias="~">публичное акционерное общество</item>
+			<item id="1" alias="ППО">публично-правовое образование</item>
+			<item id="2" alias="ООО">общество с ограниченной ответственностью</item>
+			<item id="4" alias="НАО">непубличное акционерное общество</item>
+			<item id="5" alias="ПАО">публичное акционерное общество</item>
 		</source>
 	</section>
 	<section name="agent">
@@ -57,7 +58,7 @@
 			<item id="1" alias="~">Российская Федерация Краснодарский край, Крымский район</item>
 			<item id="2" alias="~">Российская Федерация Краснодарский край, Крымский муниципальный район</item>
 		</source>
-		<source name="right">
+		<source name="rights">
 			<item id="0" alias="~"></item>
 			<item id="1" alias="~">аренда</item>
 			<item id="2" alias="~">собственность</item>

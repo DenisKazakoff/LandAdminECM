@@ -45,11 +45,11 @@ class TabCommon ( scrlpanel.ScrolledPanel ):
         
         dataSource = modules.DataSource()
         listCityNames = dataSource.RetrieveData(
-            'common','cityname', True)
+            'common','cityname', 'alias')
         listServNames = dataSource.RetrieveData(
-            'common','servname', True)
+            'common','servname', 'alias')
         listClientTypes = dataSource.RetrieveData(
-            'common','clienttype', True)
+            'common','clienttype', 'alias')
         listMonths = list(calendar.month_name)
             
         self.txtSkpNum = wx.TextCtrl(
@@ -105,7 +105,7 @@ class TabCommon ( scrlpanel.ScrolledPanel ):
         self.chcRegMonth = wx.Choice(
             self, id = wx.ID_ANY, pos = wx.DefaultPosition,
             size = ( 150,-1 ), choices = listMonths, style = 0 )
-        self.chcSkpMonth.SetSelection(
+        self.chcRegMonth.SetSelection(
             int(datetime.datetime.today().strftime("%m")) )
         
         self.spnRegYear = wx.SpinCtrl(
@@ -287,15 +287,8 @@ class PanelPerson ( scrlpanel.ScrolledPanel ):
         
         dataSource = modules.DataSource()
         listIDtypes = dataSource.RetrieveData(
-            'person','idtype', True)
+            'person','idtype', 'alias')
         listMonths = list(calendar.month_name)
-
-        self.txtName1 = wx.TextCtrl(
-            self, wx.ID_ANY, u"",
-            wx.DefaultPosition, ( 200,-1 ), 0 )
-        sizerName1 = wx.StaticBoxSizer( 
-            wx.HORIZONTAL, self, u"Имя" )
-        sizerName1.Add( self.txtName1 )
 
         self.txtName2 = wx.TextCtrl(
             self, wx.ID_ANY, u"",
@@ -303,6 +296,13 @@ class PanelPerson ( scrlpanel.ScrolledPanel ):
         sizerName2 = wx.StaticBoxSizer( 
             wx.HORIZONTAL, self, u"Фамилия" )
         sizerName2.Add( self.txtName2 )
+
+        self.txtName1 = wx.TextCtrl(
+            self, wx.ID_ANY, u"",
+            wx.DefaultPosition, ( 200,-1 ), 0 )
+        sizerName1 = wx.StaticBoxSizer( 
+            wx.HORIZONTAL, self, u"Имя" )
+        sizerName1.Add( self.txtName1 )
 
         self.txtName3 = wx.TextCtrl(
             self, wx.ID_ANY, u"",
@@ -467,10 +467,10 @@ class PanelPerson ( scrlpanel.ScrolledPanel ):
         grid.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
         
         grid.Add( 
-            sizerName1, wx.GBPosition( 0, 0 ), 
+            sizerName2, wx.GBPosition( 0, 0 ), 
             wx.GBSpan( 1, 1 ), wx.EXPAND|wx.ALL, 5 )
         grid.Add( 
-            sizerName2, wx.GBPosition( 0, 1 ), 
+            sizerName1, wx.GBPosition( 0, 1 ), 
             wx.GBSpan( 1, 1 ), wx.EXPAND|wx.ALL, 5 )
         grid.Add( 
             sizerName3, wx.GBPosition( 0, 2 ), 
@@ -530,6 +530,7 @@ class PanelPerson ( scrlpanel.ScrolledPanel ):
         self.SetupScrolling( )
         #vsizer.SetSizeHints( self )
         vsizer.Layout()
+        #self.Show()
         
         # Events
         self.txtName1.Bind(
@@ -614,12 +615,14 @@ class PanelFirm ( scrlpanel.ScrolledPanel ):
         
         dataSource = modules.DataSource()
         listFirmTypes = dataSource.RetrieveData(
-            'firm','firmtype', True)
+            'firm','firmtype')
+        listShortTypes = dataSource.RetrieveData(
+            'firm','firmtype','alias')
         listMonths = list(calendar.month_name)
       
         self.txtFirmTitle = wx.TextCtrl(
             self, id = wx.ID_ANY, pos = wx.DefaultPosition,
-            size = ( 420,-1 ), style = 0,
+            size = ( 650,-1 ), style = 0,
             value = u"" )
         sizerFirmTitle = wx.StaticBoxSizer( 
             wx.HORIZONTAL, self, u"Наименование" )
@@ -632,6 +635,14 @@ class PanelFirm ( scrlpanel.ScrolledPanel ):
         sizerFirmType = wx.StaticBoxSizer( 
             wx.HORIZONTAL, self, u"Организационно-правовая форма" )
         sizerFirmType.Add( self.cmbxFirmType )
+
+        self.txtShortType = wx.TextCtrl(
+            self, id = wx.ID_ANY, pos = wx.DefaultPosition,
+            size = ( 200,-1 ), style = 0,
+            value = u"" )
+        sizerShortType = wx.StaticBoxSizer( 
+            wx.HORIZONTAL, self, u"Сокращенная форма" )
+        sizerShortType.Add( self.txtShortType )
 
         self.spnRegDay = wx.SpinCtrl(
             self, id = wx.ID_ANY, pos = wx.DefaultPosition, 
@@ -728,10 +739,13 @@ class PanelFirm ( scrlpanel.ScrolledPanel ):
         
         grid.Add( 
             sizerFirmTitle, wx.GBPosition( 0, 0 ), 
-            wx.GBSpan( 1, 2 ), wx.EXPAND|wx.ALL, 5 )
+            wx.GBSpan( 1, 3 ), wx.EXPAND|wx.ALL, 5 )
         grid.Add( 
             sizerFirmType, wx.GBPosition( 1, 0 ), 
             wx.GBSpan( 1, 2 ), wx.EXPAND|wx.ALL, 5 )
+        grid.Add( 
+            sizerShortType, wx.GBPosition( 1, 2 ), 
+            wx.GBSpan( 1, 1 ), wx.EXPAND|wx.ALL, 5 )
         grid.Add( 
             sizerRegDate, wx.GBPosition( 2, 0 ), 
             wx.GBSpan( 1, 2 ), wx.EXPAND|wx.ALL, 5 )
@@ -770,9 +784,15 @@ class PanelFirm ( scrlpanel.ScrolledPanel ):
         self.SetupScrolling( )
         #vsizer.SetSizeHints( self )
         vsizer.Layout()
+        #self.Show()
 
         # Events
+        self.cmbxFirmType.Bind( 
+            wx.EVT_COMBOBOX, self.OnChnage_cmbxFirmType )
+
         self.txtFirmTitle.Bind( 
+            wx.EVT_TEXT, self.OnChnage_AnyCtrl )
+        self.txtShortType.Bind( 
             wx.EVT_TEXT, self.OnChnage_AnyCtrl )
         self.txtRegAddr.Bind( 
             wx.EVT_TEXT, self.OnChnage_AnyCtrl )
@@ -794,8 +814,7 @@ class PanelFirm ( scrlpanel.ScrolledPanel ):
             wx.EVT_TEXT, self.OnChnage_AnyCtrl )
         self.chcRegMonth.Bind( 
             wx.EVT_CHOICE, self.OnChnage_AnyCtrl )
-        self.cmbxFirmType.Bind( 
-            wx.EVT_COMBOBOX, self.OnChnage_AnyCtrl )
+
         self.cmbxFirmType.Bind( 
             wx.EVT_TEXT, self.OnChnage_AnyCtrl )
         return
@@ -804,6 +823,17 @@ class PanelFirm ( scrlpanel.ScrolledPanel ):
         event.Skip()
         parent = self.GetParent().GetParent().GetParent() # PanelDeclarant
         parent.OnChnage_AnyCtrl( event )
+        return
+
+    def OnChnage_cmbxFirmType (self, event):
+        event.Skip()
+        dataSource = modules.DataSource()
+        listShortTypes = dataSource.RetrieveData(
+            'firm','firmtype','alias')
+        selection = self.cmbxFirmType.GetSelection()
+        self.txtShortType.SetValue( 
+            listShortTypes[ selection ] )
+        self.OnChnage_AnyCtrl( event )
         return
 
 ###########################################################################
@@ -833,17 +863,10 @@ class TabAgent ( scrlpanel.ScrolledPanel ):
 
         dataSource = modules.DataSource()
         listIDtypes = dataSource.RetrieveData(
-            'agent','idtype', True)
+            'agent','idtype', 'alias' )
         listDocTypes = dataSource.RetrieveData(
-            'agent','doctype', True)
+            'agent','doctype', 'alias' )
         listMonths = list(calendar.month_name)
-
-        self.txtName1 = wx.TextCtrl(
-            self, wx.ID_ANY, u"",
-            wx.DefaultPosition, ( 200,-1 ), 0 )
-        sizerName1 = wx.StaticBoxSizer( 
-            wx.HORIZONTAL, self, u"Имя" )
-        sizerName1.Add( self.txtName1 )
 
         self.txtName2 = wx.TextCtrl(
             self, wx.ID_ANY, u"",
@@ -851,6 +874,13 @@ class TabAgent ( scrlpanel.ScrolledPanel ):
         sizerName2 = wx.StaticBoxSizer( 
             wx.HORIZONTAL, self, u"Фамилия" )
         sizerName2.Add( self.txtName2 )
+
+        self.txtName1 = wx.TextCtrl(
+            self, wx.ID_ANY, u"",
+            wx.DefaultPosition, ( 200,-1 ), 0 )
+        sizerName1 = wx.StaticBoxSizer( 
+            wx.HORIZONTAL, self, u"Имя" )
+        sizerName1.Add( self.txtName1 )
 
         self.txtName3 = wx.TextCtrl(
             self, wx.ID_ANY, u"",
@@ -1002,6 +1032,14 @@ class TabAgent ( scrlpanel.ScrolledPanel ):
             u"Документ, удостоверяющий полномочия" )
         sizerDocType.Add( self.cmbxDocType )
 
+        self.txtDocNum = wx.TextCtrl(
+            self, id = wx.ID_ANY, pos = wx.DefaultPosition, 
+            size = ( 200,-1 ), style = wx.TE_RIGHT,
+            value = u"" )
+        sizerDocNum = wx.StaticBoxSizer( 
+            wx.HORIZONTAL, self, u"Номер документа" )
+        sizerDocNum.Add( self.txtDocNum )
+
         self.spnDocDay = wx.SpinCtrl(
             self, id = wx.ID_ANY, pos = wx.DefaultPosition, 
             size = ( 70,-1 ), style = wx.SP_ARROW_KEYS|wx.ALIGN_RIGHT, 
@@ -1031,14 +1069,6 @@ class TabAgent ( scrlpanel.ScrolledPanel ):
         sizerDocDate.Add( self.chcDocMonth )
         sizerDocDate.Add( self.spnDocYear )
 
-        self.txtDocNum = wx.TextCtrl(
-            self, id = wx.ID_ANY, pos = wx.DefaultPosition, 
-            size = ( 200,-1 ), style = wx.TE_RIGHT,
-            value = u"" )
-        sizerDocNum = wx.StaticBoxSizer( 
-            wx.HORIZONTAL, self, u"Номер документа" )
-        sizerDocNum.Add( self.txtDocNum )
-
         self.txtDocWho = wx.TextCtrl(
             self, id = wx.ID_ANY, pos = wx.DefaultPosition, 
             size = ( 650,-1 ), style = 0, 
@@ -1052,10 +1082,10 @@ class TabAgent ( scrlpanel.ScrolledPanel ):
         grid.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
         
         grid.Add( 
-            sizerName1, wx.GBPosition( 0, 0 ), 
+            sizerName2, wx.GBPosition( 0, 0 ), 
             wx.GBSpan( 1, 1 ), wx.EXPAND|wx.ALL, 5 )
         grid.Add( 
-            sizerName2, wx.GBPosition( 0, 1 ), 
+            sizerName1, wx.GBPosition( 0, 1 ), 
             wx.GBSpan( 1, 1 ), wx.EXPAND|wx.ALL, 5 )
         grid.Add( 
             sizerName3, wx.GBPosition( 0, 2 ), 
@@ -1218,17 +1248,17 @@ class TabArea ( scrlpanel.ScrolledPanel ):
 
         dataSource = modules.DataSource()
         listAreaRights = dataSource.RetrieveData(
-            'area','right', True)
+            'area','rights', 'alias' )
         listAreaCategories = dataSource.RetrieveData(
-            'area','category', True)
+            'area','category', 'alias' )
         listPlaces = dataSource.RetrieveData(
-            'area','place', True)
+            'area','place', 'alias' )
         listAreaTargets = dataSource.RetrieveData(
-            'area','target', True)
+            'area','target', 'alias' )
         listAreaTerZones = dataSource.RetrieveData(
-            'area','terzone', False)
+            'area','terzone')
         listAreaSpcZones = dataSource.RetrieveData(
-            'area','spczone', True)
+            'area','spczone')
        
         self.cmbxPlace = wx.ComboBox(           
             self, id = wx.ID_ANY, pos = wx.DefaultPosition, 
@@ -1295,7 +1325,7 @@ class TabArea ( scrlpanel.ScrolledPanel ):
 
         sizerKN1 = wx.StaticBoxSizer( 
             wx.HORIZONTAL, self, 
-            u"Кадастровый номер земельного участка" )
+            u"Кадастровый номер/квартал земельного участка" )
         sizerKN1.Add( self.txtKN11 )
         sizerKN1.Add( self.txtKN12 )
         sizerKN1.Add( self.txtKN13 )
@@ -1328,7 +1358,7 @@ class TabArea ( scrlpanel.ScrolledPanel ):
 
         sizerKN2 = wx.StaticBoxSizer( 
             wx.HORIZONTAL, self, 
-            u"Кадастровый номер ближайшего участка" )
+            u"Кадастровый номер ближайшего земельного участка" )
         sizerKN2.Add( self.txtKN21 )
         sizerKN2.Add( self.txtKN22 )
         sizerKN2.Add( self.txtKN23 )
@@ -1458,7 +1488,7 @@ class TabArea ( scrlpanel.ScrolledPanel ):
     def RefrechSpcZones ( self, listZones ):
         dataSource = modules.DataSource()
         listAreaSpcZones = dataSource.RetrieveData(
-            'area','spczone', True, True)
+            'area','spczone', 'alias', True )
 
         self.lstbSpcZones.Clear( )
         for zoneIdx in listZones:
@@ -1722,6 +1752,13 @@ class PanelDoc ( wx.Panel ):
             self.OnClickbtnNext )       
         return
 
+    def RefreshTabAgent( self ):
+        if self.tabCommon.cbxNeedAgent.IsChecked( ):
+            self.notebook.EnableTab( 2, enabled = True )
+        else:
+            self.notebook.EnableTab( 2, enabled = False )
+        return
+
     def RefreshTabDeclarant( self ):
 
         self.notebook.EnableTab( 1, enabled = False )        
@@ -1735,49 +1772,38 @@ class PanelDoc ( wx.Panel ):
             self.tabDeclarant.sizer.Add( 
                 self.tabDeclarant.pnlDeclarant, 1, 
                 flag=wx.EXPAND|wx.ALL, border=0 )
-            self.tabDeclarant.pnlDeclarant.Show()
-            self.notebook.EnableTab( 1, enabled = True )
             parent = self.tabDeclarant.pnlDeclarant
             parent.txtTaxID.Enable( False )
             parent.txtOGRNIP.Enable( False )
-            self.tabCommon.cbxNeedAgent.SetValue( False )
-            self.tabCommon.cbxNeedAgent.Enable( )
-            self.RefreshTabAgent()
-            self.notebook.EnableTab( 1, enabled = True )
+            parent.Show()
 
         if ( self.tabCommon.chcClientType.GetSelection( ) == 3 ):
             self.tabDeclarant.pnlDeclarant = PanelPerson( self.tabDeclarant )
             self.tabDeclarant.sizer.Add( 
                 self.tabDeclarant.pnlDeclarant, 1, 
                 flag=wx.EXPAND|wx.ALL, border=0 )
-            self.tabDeclarant.pnlDeclarant.Show( )
-            self.notebook.EnableTab( 1, enabled = True )
             parent = self.tabDeclarant.pnlDeclarant
             parent.txtTaxID.Enable( True )
             parent.txtOGRNIP.Enable( True )
-            self.tabCommon.cbxNeedAgent.SetValue( False )
-            self.tabCommon.cbxNeedAgent.Enable( )
-            self.RefreshTabAgent()
-            self.notebook.EnableTab( 1, enabled = True )
+            parent.Show()
 
         if ( self.tabCommon.chcClientType.GetSelection( ) == 2 ):
             self.tabDeclarant.pnlDeclarant = PanelFirm( self.tabDeclarant )
             self.tabDeclarant.sizer.Add( 
                 self.tabDeclarant.pnlDeclarant, 1, 
                 flag=wx.EXPAND|wx.ALL, border=0 )          
-            self.tabDeclarant.pnlDeclarant.Show( )
-            self.tabCommon.cbxNeedAgent.SetValue( True )
-            self.tabCommon.cbxNeedAgent.Disable( )
-            self.RefreshTabAgent()
+            self.tabDeclarant.pnlDeclarant.Show()
+            
+        if ( self.tabCommon.chcClientType.GetSelection( ) != 0 ):
             self.notebook.EnableTab( 1, enabled = True )
+            selectedTab = self.notebook.GetSelection( )
+            if ( selectedTab == 1 ):
+                self.notebook.SetSelection( 0 )
+                self.notebook.SetSelection( 1 )
+            self.tabCommon.cbxNeedAgent.SetValue( False )
+            self.tabCommon.cbxNeedAgent.Enable( )
+            self.RefreshTabAgent()           
         return 
-
-    def RefreshTabAgent( self ):
-        if self.tabCommon.cbxNeedAgent.IsChecked( ):
-            self.notebook.EnableTab( 2, enabled = True )
-        else:
-            self.notebook.EnableTab( 2, enabled = False )
-        return
      
     def SetAllTabs( self ):
         for idx in range(5):
@@ -1889,10 +1915,12 @@ class PanelDoc ( wx.Panel ):
             parent = self.tabDeclarant.pnlDeclarant
             sectionName = 'firm'
             
-            parent.cmbxFirmType.SetValue( 
-                caseDoc.GetTagValue( sectionName, 'firmtype' ) )
             parent.txtFirmTitle.SetValue( 
                 caseDoc.GetTagValue( sectionName, 'firmtitle' ) )
+            parent.cmbxFirmType.SetValue( 
+                caseDoc.GetTagValue( sectionName, 'firmtype' ) )
+            parent.txtShortType.SetValue( 
+                caseDoc.GetTagValue( sectionName, 'shorttype' ) )
             parent.txtRegAddr.SetValue( 
                 caseDoc.GetTagValue( sectionName, 'regaddr' ) )
             parent.txtRegOrg.SetValue( 
@@ -2024,9 +2052,11 @@ class PanelDoc ( wx.Panel ):
             selectedSpcZones = caseDoc.GetTagValue( 
                 sectionName, 'spczone' ).split( ',' )
             if ( len( selectedSpcZones ) > 0 ):
-                selectedSpcZones = map( int, selectedSpcZones )
-                selectedSpcZones = [ ( x - 1 ) for x in selectedSpcZones ]
-                parent.RefrechSpcZones( selectedSpcZones )
+                try:
+                    for idx, zone in enumerate(selectedSpcZones):
+                        selectedSpcZones[ idx ] = ( int(zone) - 1 )
+                except Exception as e: print (e)
+                else: parent.RefrechSpcZones( selectedSpcZones )
 
         if  ( tabIdx == 4 ):
             parent =  self.tabRules
@@ -2068,10 +2098,9 @@ class PanelDoc ( wx.Panel ):
                 str( parent.txtSkpNum.GetValue( ) ) )
 
             listDate = [ 
-                parent.spnSkpDay.GetValue( ),
-                parent.chcSkpMonth.GetSelection( ),
-                parent.spnSkpYear.GetValue( ) ]
-            listDate = map( str, listDate )
+                str( parent.spnSkpDay.GetValue( ) ).zfill( 2 ),
+                str( parent.chcSkpMonth.GetSelection( ) ).zfill( 2 ),
+                str( parent.spnSkpYear.GetValue( ) ) ]
             caseDoc.SetTagValue( sectionName, 
                 'skpdate', '-'.join( listDate ) )
 
@@ -2079,10 +2108,9 @@ class PanelDoc ( wx.Panel ):
                 str( parent.txtRegNum.GetValue( ) ) )
 
             listDate = [ 
-                parent.spnRegDay.GetValue( ),
-                parent.chcRegMonth.GetSelection( ),
-                parent.spnRegYear.GetValue( ) ]
-            listDate = map( str, listDate )
+                str( parent.spnRegDay.GetValue( ) ).zfill( 2 ),
+                str( parent.chcRegMonth.GetSelection( ) ).zfill( 2 ),
+                str( parent.spnRegYear.GetValue( ) ) ]
             caseDoc.SetTagValue( sectionName, 
                 'regdate', '-'.join( listDate ) )
 
@@ -2111,10 +2139,9 @@ class PanelDoc ( wx.Panel ):
                 str( parent.txtName3.GetValue( ) ) )
 
             listDate = [ 
-                parent.spnBirthDay.GetValue( ),
-                parent.chcBirthMonth.GetSelection( ),
-                parent.spnBirthYear.GetValue( ) ]
-            listDate = map( str, listDate )
+                str( parent.spnBirthDay.GetValue( ) ).zfill( 2 ),
+                str( parent.chcBirthMonth.GetSelection( ) ).zfill( 2 ),
+                str( parent.spnBirthYear.GetValue( ) ) ]
             caseDoc.SetTagValue( sectionName, 
                 'birthdate', '-'.join( listDate ) )
 
@@ -2132,10 +2159,9 @@ class PanelDoc ( wx.Panel ):
                 str( parent.txtIDcode2.GetValue( ) ) )
 
             listDate = [ 
-                parent.spnIDday.GetValue( ),
-                parent.chcIDmonth.GetSelection( ),
-                parent.spnIDyear.GetValue( ) ]
-            listDate = map( str, listDate )
+                str( parent.spnIDday.GetValue( ) ).zfill( 2 ),
+                str( parent.chcIDmonth.GetSelection( ) ).zfill( 2 ),
+                str( parent.spnIDyear.GetValue( ) ) ]
             caseDoc.SetTagValue( sectionName, 
                 'iddate', '-'.join( listDate ) )
 
@@ -2155,20 +2181,21 @@ class PanelDoc ( wx.Panel ):
             parent = self.tabDeclarant.pnlDeclarant
             sectionName = 'firm'
            
-            caseDoc.SetTagValue( sectionName, 'firmtype',
-                str( parent.cmbxFirmType.GetValue( ) ) )
             caseDoc.SetTagValue( sectionName, 'firmtitle',
                 str( parent.txtFirmTitle.GetValue( ) ) )
+            caseDoc.SetTagValue( sectionName, 'firmtype',
+                str( parent.cmbxFirmType.GetValue( ) ) )
+            caseDoc.SetTagValue( sectionName, 'shorttype',
+                str( parent.txtShortType.GetValue( ) ) )
             caseDoc.SetTagValue( sectionName, 'regaddr',
                 str( parent.txtRegAddr.GetValue( ) ) )
             caseDoc.SetTagValue( sectionName, 'regorg',
                 str( parent.txtRegOrg.GetValue( ) ) )
 
             listDate = [ 
-                parent.spnRegDay.GetValue( ),
-                parent.chcRegMonth.GetSelection( ),
-                parent.spnRegYear.GetValue( ) ]
-            listDate = map( str, listDate )
+                str( parent.spnRegDay.GetValue( ) ).zfill( 2 ),
+                str( parent.chcRegMonth.GetSelection( ) ).zfill( 2 ),
+                str( parent.spnRegYear.GetValue( ) ) ]
             caseDoc.SetTagValue( sectionName, 
                 'regdate', '-'.join( listDate ) )
 
@@ -2196,10 +2223,9 @@ class PanelDoc ( wx.Panel ):
                 str( parent.txtName3.GetValue( ) ) )
 
             listDate = [ 
-                parent.spnBirthDay.GetValue( ),
-                parent.chcBirthMonth.GetSelection( ),
-                parent.spnBirthYear.GetValue( ) ]
-            listDate = map( str, listDate )
+                str( parent.spnBirthDay.GetValue( ) ).zfill( 2 ),
+                str( parent.chcBirthMonth.GetSelection( ) ).zfill( 2 ),
+                str( parent.spnBirthYear.GetValue( ) ) ]
             caseDoc.SetTagValue( sectionName, 
                 'birthdate', '-'.join( listDate ) )
 
@@ -2217,10 +2243,9 @@ class PanelDoc ( wx.Panel ):
                 str( parent.txtIDcode2.GetValue( ) ) )
 
             listDate = [ 
-                parent.spnIDday.GetValue( ),
-                parent.chcIDmonth.GetSelection( ),
-                parent.spnIDyear.GetValue( ) ]
-            listDate = map( str, listDate )
+                str( parent.spnIDday.GetValue( ) ).zfill( 2 ),
+                str( parent.chcIDmonth.GetSelection( ) ).zfill( 2 ),
+                str( parent.spnIDyear.GetValue( ) ) ]
             caseDoc.SetTagValue( sectionName, 
                 'iddate', '-'.join( listDate ) )
 
@@ -2236,10 +2261,9 @@ class PanelDoc ( wx.Panel ):
                 str( parent.txtDocWho.GetValue( ) ) )
 
             listDate = [ 
-                parent.spnDocDay.GetValue( ),
-                parent.chcDocMonth.GetSelection( ),
-                parent.spnDocYear.GetValue( ) ]
-            listDate = map( str, listDate )
+                str( parent.spnDocDay.GetValue( ) ).zfill( 2 ),
+                str( parent.chcDocMonth.GetSelection( ) ).zfill( 2 ),
+                str( parent.spnDocYear.GetValue( ) ) ]
             caseDoc.SetTagValue( sectionName, 
                 'docdate', '-'.join( listDate ) )
 
@@ -2543,12 +2567,6 @@ class FrameMain ( wx.Frame ):
                 for itemID in self.menubar.menuScheme[ submenu ].items:
                     item = self.menubar.menuScheme[ submenu ].items[ itemID ]
                     item.Enable( True )
-            '''
-            for submenu in self.menubar.menuScheme:
-                rootItem = self.menubar.menuScheme[ submenu ].rootItem
-                if ( rootItem.GetItemLabelText( ) == 'Сельские поселения' ):
-                    break
-            '''
         return
 
     def RefreshStatusBar( self ):
@@ -2719,7 +2737,9 @@ class FrameMain ( wx.Frame ):
             try: 
                 if not dirPath.exists( ): 
                     return False
-            except Exception as e: print (e)    
+            except Exception as e: 
+                    print (e)
+                    return False                    
             self.panelDoc.fileName = \
                 dirPath.joinpath( 
                     f'Дело{caseNum}_{skpNum}.csd' )
@@ -2817,7 +2837,7 @@ class FrameSpcZones ( wx.Dialog ):
 
         dataSource = modules.DataSource()
         listAreaSpcZones = dataSource.RetrieveData(
-            'area','spczone', True, True )
+            'area','spczone', 'alias', True )
 
         self.lstbSpcZones = wx.ListBox( 
             self, id = wx.ID_ANY, pos = wx.DefaultPosition, 

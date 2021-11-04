@@ -6,6 +6,15 @@
 		<item name="created" />
 		<item name="changed" />
 	</section>
+	<section name="special">
+		<item name="areaaddr" />
+		<item name="clientname" />
+		<item name="checkdate" />
+		<item name="listkadnum" />
+		<item name="areakadnum" />
+		<item name="nearkadnum" />
+		<item name="anykadnum" />		
+	</section>
 	<section name="common">
 		<item name="sinkopa" />
 		<item name="skpdate" />
@@ -37,6 +46,7 @@
 	</section>
 	<section name="firm">
 		<item name="firmtype" />
+		<item name="shorttype" />
 		<item name="firmtitle" />
 		<item name="regaddr" />
 		<item name="regorg" />
