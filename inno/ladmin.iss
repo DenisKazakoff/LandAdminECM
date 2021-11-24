@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "LandAdmin"
-#define MyAppVersion "0.9b1"
+#define MyAppVersion "0.9-beta.1"
 #define MyAppPublisher "Denis Kazakov"
 #define MyAppURL "https://github.com/DenisKazakoff/land_admin_ecm"
 #define MyAppExeName "launcher.cmd"
