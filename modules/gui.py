@@ -1773,7 +1773,7 @@ class PanelDoc ( wx.Panel ):
                 self.tabDeclarant.pnlDeclarant, 1, 
                 flag=wx.EXPAND|wx.ALL, border=0 )
             parent = self.tabDeclarant.pnlDeclarant
-            parent.txtTaxID.Enable( False )
+            #parent.txtTaxID.Enable( False )
             parent.txtOGRNIP.Enable( False )
             parent.Show()
 
@@ -1783,7 +1783,7 @@ class PanelDoc ( wx.Panel ):
                 self.tabDeclarant.pnlDeclarant, 1, 
                 flag=wx.EXPAND|wx.ALL, border=0 )
             parent = self.tabDeclarant.pnlDeclarant
-            parent.txtTaxID.Enable( True )
+            #parent.txtTaxID.Enable( True )
             parent.txtOGRNIP.Enable( True )
             parent.Show()
 
@@ -2902,16 +2902,25 @@ class FrameAbout ( wx.Dialog ):
 
         txtLcns = wx.TextCtrl(
             self, wx.ID_ANY,
-            u'Copyright (C) 2021  Denis Kazakov\n'\
-            +'e-mail: denis.kazakoff@gmail.com\n\n'
-            +'    This program is free software: you can redistribute it and/or modify '\
-            +'it under the terms of the GNU General Public License as published by '\
-            +'the Free Software Foundation, either version 3 of the License, or '\
-            +'(at your option) any later version.\n\n'\
-            +'    This program is distributed in the hope that it will be useful, '\
-            +'but WITHOUT ANY WARRANTY; without even the implied warranty of '\
-            +'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the '\
-            +'GNU General Public License for more details.',
+            ('Система электронного документооборота\n'
+           '"Управление Земельными Ресурсами"\n'
+           'Версия 0.9-beta.1 (11.2021)\n\n'
+            
+            'Программа является свободным программным\n'
+            'обеспечением: вы можете распространять ее\n' 
+            'и/или изменять в соответствии с условиями\n'
+            'Общей публичной лицензии GNU, опубликованной\n'
+            'Фондом свободного программного обеспечения,\n' 
+            'версии 3 Лицензии, либо (по вашему выбору)\n' 
+            'любой более поздней версии.\n\n'
+            
+            'Программа поставляется по принципу\n'
+            '"AS IS" ("как есть"). Никакие гарантии\n'
+            'не прилагаются и не предусматриваются.\n\n'
+            
+            'Сайт проекта:\n' 
+            'https://github.com/DenisKazakoff/land_admin_ecm\n'
+            'Автор: Денис Казаков (denis.kazakoff@gmail.com)'),
             wx.DefaultPosition, ( 390,-1 ), wx.TE_READONLY|wx.TE_MULTILINE|wx.ALIGN_CENTRE_HORIZONTAL )
         
         licsizer = wx.BoxSizer( wx.HORIZONTAL )
